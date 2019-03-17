@@ -6,8 +6,8 @@ A. Ling, M. Mathur, K. Kapphahn, M. Montez-Rath, M. Desai. How to apply multiple
 
 Address any inquiries to yling [AT] stanford [DOT] edu.
 
-Step1.R
-treatment effect estimate using true regression model using full data
+Step1.R 
+- treatment effect estimate using true regression model using full data
 - treatment effect estimate using PSM using full data
 - treatment effect estimate using complete case analysis (CC), complete variable analysis (CVA), mean imputation, missing indicator
 
