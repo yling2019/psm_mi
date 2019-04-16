@@ -2,7 +2,7 @@
 
 This repository contains all code required to reproduce analyses in:
 
-A. Ling, M. Mathur, K. Kapphahn, M. Montez-Rath, M. Desai. How to apply multiple imputation in propensity score matching with partially observed confounders? Under review, 2019+.
+A. Ling, M. Montez-Rath, M. Mathur, K. Kapphahn, M. Desai. How to apply multiple imputation in propensity score matching with partially observed confounders? Under review, 2019+.
 
 Address any inquiries to yling [AT] stanford [DOT] edu.
 
