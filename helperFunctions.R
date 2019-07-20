@@ -425,7 +425,7 @@ MIwithPSmatching<-function(complete.data, simulated.data, m=5, impMethod="active
       data$index<-data$.id
 
       # matching
-      data.matched <- Match(Y=data$outcome, Tr=data$treatment, X=data$PS, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+      data.matched <- Match(Y=data$outcome, Tr=data$treatment, X=logit(data$PS), M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
       
       # plot standardized difference
       stDiff1[[i]]<-plotStandardizedDiff(complete.data, data.matched, nBin=nBin, nNor=nNor, nCovariates=nCovariates, confounders=confounders, outcomeBetas=outcomeBetas, main=paste(impMethod, intMethod, MIwithAux, i, sep="-"), return=TRUE, plot=FALSE)
@@ -459,7 +459,7 @@ MIwithPSmatching<-function(complete.data, simulated.data, m=5, impMethod="active
     }
     
     # matching
-    data.matched <- Match(Y=impute.input2$outcome, Tr=impute.input2$treatment, X=impute.input2$finalPS, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+    data.matched <- Match(Y=impute.input2$outcome, Tr=impute.input2$treatment, X=logit(impute.input2$finalPS), M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
     
     # plot standardized difference
     impute.input2<-impute.input2[,c("X1", "finalX2", "treatment", "outcome", "index")]
@@ -484,7 +484,7 @@ MIwithPSmatching<-function(complete.data, simulated.data, m=5, impMethod="active
     
     # estimate variance
     overall.se<-dr[2]
-  } else if (intMethod=="MIpar"){
+  } else if (intMethod=="across2"){
     # calculate average PS coefficients
     coef<-matrix(data=NA, nrow=m, ncol=3)
     for (i in 1:m){
@@ -502,10 +502,10 @@ MIwithPSmatching<-function(complete.data, simulated.data, m=5, impMethod="active
     impute.input2$X1<-as.numeric(as.character(impute.input2$X1))
     
     # calculate PS
-    PS<-coef_combined[1] + coef_combined[2]*impute.input2$X1 + coef_combined[3]*impute.input2$finalX2
+    PS_logit<-coef_combined[1] + coef_combined[2]*impute.input2$X1 + coef_combined[3]*impute.input2$finalX2
 
     # matching
-    data.matched <- Match(Y=impute.input2$outcome, Tr=impute.input2$treatment, X=PS, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+    data.matched <- Match(Y=impute.input2$outcome, Tr=impute.input2$treatment, X=PS_logit, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
     
     # plot standardized difference
     impute.input2<-impute.input2[,c("X1", "finalX2", "treatment", "outcome", "index")]
