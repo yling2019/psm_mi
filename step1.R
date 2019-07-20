@@ -79,7 +79,7 @@ for (i in 1:nSimulation){
 	# estimate treatment effect using true regression model on full data
 	model1<-glm(outcome ~ . , data = simulated.data[,1:(ncol(covariates) + 2)])
   	ps.model1 <- glm(as.formula(paste("treatment ~", paste(confounders, collapse="+"))), data=simulated.data, family = binomial)
-  	data.matched1 <- Match(Y=simulated.data$outcome, Tr=simulated.data$treatment, X=ps.model1$fitted, M=1, caliper = caliper, ties=FALSE, replace=FALSE)
+  	data.matched1 <- Match(Y=simulated.data$outcome, Tr=simulated.data$treatment, X=logit(ps.model1$fitted), M=1, caliper = caliper, ties=FALSE, replace=FALSE)
   	balance1<-plotStandardizedDiff(simulated.data, data.matched1, nBin=nBin, nNor=nNor, nCovariates=nBin+nNor, confounders=confounders, outcomeBetas=NULL, plot=FALSE, return=TRUE)
   	balance1.5<-plotStandardizedDiff(simulated.data, data.matched1, nBin=nBin, nNor=nNor, nCovariates=nBin+nNor, confounders=confounders, outcomeBetas=NULL, plot=FALSE, return=TRUE)
   	#treatment.estimate1<-mean(simulated.data$outcome[data.matched1$index.treated]) - mean(simulated.data$outcome[data.matched1$index.control])
@@ -94,7 +94,7 @@ for (i in 1:nSimulation){
 	model2<-glm(outcome ~ . , data = simulated.data2[,1:(ncol(covariates) + 2)])
   
 	ps.model2 <- glm(as.formula(paste("treatment ~", paste(confounders, collapse="+"))), data=simulated.data2, family = binomial)
-	data.matched2 <- Match(Y=simulated.data2$outcome, Tr=simulated.data2$treatment, X=ps.model2$fitted, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+	data.matched2 <- Match(Y=simulated.data2$outcome, Tr=simulated.data2$treatment, X=logit(ps.model2$fitted), M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
 	#treatment.estimate2<-mean(simulated.data2$outcome[data.matched2$index.treated]) - mean(simulated.data2$outcome[data.matched2$index.control])
 	#var.estimate2<-varianceEstimate(simulated.data2, data.matched2)
 	balance2<-plotStandardizedDiff(simulated.data2, data.matched2, nBin=nBin, nNor=nNor, nCovariates=nBin+nNor, confounders=confounders, outcomeBetas=NULL, plot=FALSE, return=TRUE)
@@ -110,7 +110,7 @@ for (i in 1:nSimulation){
   
 	confounders_minus<-setdiff(confounders, missingVariable)
 	ps.model3 <- glm(as.formula(paste("treatment ~", paste(confounders_minus, collapse="+"))), data=simulated.data3, family = binomial)
-	data.matched3 <- Match(Y=simulated.data3$outcome, Tr=simulated.data3$treatment, X=ps.model3$fitted, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+	data.matched3 <- Match(Y=simulated.data3$outcome, Tr=simulated.data3$treatment, X=logit(ps.model3$fitted), M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
 	#treatment.estimate3<-mean(simulated.data3$outcome[data.matched3$index.treated]) - mean(simulated.data3$outcome[data.matched3$index.control])
 	#var.estimate3<-varianceEstimate(simulated.data3, data.matched3)
 	balance3<-plotStandardizedDiff(simulated.data3, data.matched3, nBin=nBin, nNor=nNor, nCovariates=nBin+nNor, confounders=confounders, outcomeBetas=NULL, plot=FALSE, return=TRUE)
@@ -131,7 +131,7 @@ for (i in 1:nSimulation){
 	model4<-glm(outcome ~ . , data = simulated.data4[,1:(ncol(covariates) + 2)])
   
 	ps.model4 <- glm(as.formula(paste("treatment ~", paste(confounders, collapse="+"))), data=simulated.data4, family = binomial)
-	data.matched4 <- Match(Y=simulated.data4$outcome, Tr=simulated.data4$treatment, X=ps.model4$fitted, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+	data.matched4 <- Match(Y=simulated.data4$outcome, Tr=simulated.data4$treatment, X=logit(ps.model4$fitted), M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
 	#treatment.estimate4<-mean(simulated.data4$outcome[data.matched4$index.treated]) - mean(simulated.data4$outcome[data.matched4$index.control])
 	#var.estimate4<-varianceEstimate(simulated.data4, data.matched4)
 	balance4<-plotStandardizedDiff(simulated.data4, data.matched4, nBin=nBin, nNor=nNor, nCovariates=nBin+nNor, confounders=confounders, outcomeBetas=NULL, plot=FALSE, return=TRUE)
@@ -157,7 +157,7 @@ for (i in 1:nSimulation){
 
 		model5<-glm(outcome ~ . , data = simulated.data5[,c(1:(ncol(covariates) + 2))])
 		ps.model5 <- glm(as.formula(paste("treatment ~", paste(confounders, collapse="+"))), data=simulated.data5, family = binomial)
-		data.matched5 <- Match(Y=simulated.data5$outcome, Tr=simulated.data5$treatment, X=ps.model5$fitted, M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
+		data.matched5 <- Match(Y=simulated.data5$outcome, Tr=simulated.data5$treatment, X=logit(ps.model5$fitted), M=1, caliper=caliper, ties=FALSE, replace=FALSE) # Matching package
 		#treatment.estimate5<-mean(simulated.data5$outcome[data.matched5$index.treated]) - mean(simulated.data5$outcome[data.matched5$index.control])
 		#var.estimate5<-varianceEstimate(simulated.data5, data.matched5)
 		balance5<-plotStandardizedDiff(simulated.data, data.matched5, nBin=nBin, nNor=nNor, nCovariates=nBin+nNor, confounders=confounders, outcomeBetas=outcomeBetas, plot=FALSE, return=TRUE)
